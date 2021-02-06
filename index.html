@@ -3,12 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+
     <title>repl.it</title>
-		<link rel="stylesheet" href="https://patogordo.ga/Styles/predef.css">
+
+		<!-- Style -->
     <link href="Src/Styles/style.css" rel="stylesheet" type="text/css" />
 
+		<!-- Icons -->
+		<script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+		
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+		<script src="Src/Services/firebase.js"></script>
+
+		<!-- Vue Worker -->
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		<script src="https://unpkg.com/vue-router"></script>
+		
   </head>
   <body>
 
@@ -18,7 +32,8 @@
 
 		<!-- Pages Components -->
 		<script src="Src/Pages/home.vue.js"></script>
-		<script src="Src/Pages/about.vue.js"></script>
+		<script src="Src/Pages/delete.vue.js"></script>
+		<script src="Src/Pages/addpost.vue.js"></script>
 
 		<!-- App/Router Component -->
     <script src="Src/app.vue.js"></script>

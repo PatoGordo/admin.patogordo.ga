@@ -11,7 +11,7 @@ Vue.component('Exemple', {
 		}
 	},
   template: `
-	<div class="Exemple">
+	<div class="div-component Exemple">
 		<h1>Welcome to the exemple page</h1>
 		<button v-on:click={ add() }>add {{ count }}</button>
 	</div>

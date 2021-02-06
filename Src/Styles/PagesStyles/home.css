@@ -1,0 +1,53 @@
+.contact-items{
+	padding: 15px;
+	margin: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+.contact-item{
+	margin: 10px;
+	padding: 15px;
+	border: 1px solid #919191;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	width: 420px;
+	min-height: 280px;
+}
+.contact-name{
+	margin-bottom: 8px;
+	width: 100%;
+}
+.contact-message{
+	margin-bottom: 8px;
+	width: 100%;
+}
+.contact-reply{
+	background: rgb(149,117,205);
+	color: white;
+	padding: 15px;
+	border: 0;
+	justify-self: flex-end;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+.contact-reply .reply-icon{
+	font-size: 20px;
+	margin-right: 5px;
+}
+@media screen and (max-width: 480px) {
+	.contact-item{
+		width: 95%;
+	}
+}
