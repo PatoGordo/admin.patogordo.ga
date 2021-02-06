@@ -1,0 +1,34 @@
+.form{
+	width: 480px;
+	padding: 25px;
+	margin: 10px;
+	border: 1px solid #919191;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.input-box{
+	border: 0;
+	border-radius: 10px;
+	background: rgb(179,157,219);
+	color: #fff;
+	padding: 8px;
+}
+.form-submit{
+	padding: 15px;
+	margin-top: 10px;
+	border: 0;
+	border-radius: 10px;
+	color: #fff;
+	background: rgb(149,117,205);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+	.form{
+		width: 95%;
+	}
+}
