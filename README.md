@@ -1,5 +1,5 @@
 # Welcome to my portfolio admin page 👋
-![Version](https://img.shields.io/badge/version-1.1-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.2-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 [![Twitter: Patogordoo](https://img.shields.io/twitter/follow/Patogordoo.svg?style=social)](https://twitter.com/Patogordoo)
 

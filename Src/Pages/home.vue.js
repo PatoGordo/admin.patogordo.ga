@@ -2,6 +2,7 @@ Vue.component('Home', {
   data: function () {
     return {
 			contacts: [],
+			feedbacks: [],
 			selected: '',
 			loginEmail: '',
 			loginPassword: '',
@@ -40,26 +41,52 @@ Vue.component('Home', {
 			})
 		},
 		
-		loginAndShowContacts(){
-			firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
-			.then((user) => {
-				this.showLoginForm = false
-				this.message = 'Successfully logged in!'
-				this.messageClass = 'success'
-				this.updateContacts()
-				this.scrollToTop()
-				setTimeout(() => {
-					this.message = 'Click Log out to exit the system.' 
-					this.messageClass = 'warn'
-				}, 2000)
+		updateFeedbacks(){
+			const items = []
+			feedbackRef.get()
+			.then(res => {
+				res.forEach(function(doc) {
+					items.push({ item : doc.data() })
+				})
+				this.feedbacks = items
 			})
-			.catch((error) => {
-				this.showLoginForm = true
-				this.message = `Error! Message: ${error.message}`
+			.catch((err) => {
+				this.message = `Error on get data! Error: ${err}`
 				this.messageClass = 'error'
 				this.scrollToTop()
-				this.returnMessageToNormal(3000)
+				this.returnMessageToNormal()
 			})
+		},
+
+		loginAndShowContacts(){
+			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+			.then(() => {
+				
+				return firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword)
+				.then((user) => {
+					this.showLoginForm = false
+					this.message = 'Successfully logged in!'
+					this.messageClass = 'success'
+					this.updateContacts()
+					this.updateFeedbacks()
+					this.scrollToTop()
+					setTimeout(() => {
+						this.message = 'Click Log out to exit the system.' 
+						this.messageClass = 'warn'
+					}, 2000)
+				})
+				.catch((error) => {
+					this.showLoginForm = true
+					this.message = `Error! Message: ${error.message}`
+					this.messageClass = 'error'
+					this.scrollToTop()
+					this.returnMessageToNormal(3000)
+				})
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+			});
 		},
 		
 		deleteData(){
@@ -112,12 +139,13 @@ Vue.component('Home', {
 			<button type="submit" class="form-submit">Sign in</button>
 		</form>
 
-		<div class="contentBeforeLogin" :style="showLoginForm ? 'display: none' : 'display: block'">
+		<div class="contentAfterLogin" :style="showLoginForm ? 'display: none' : 'display: flex'">
 			<div class="header">
 				<h1>Welcome to control page!</h1>
 				<button @click="logOut()" class="logout-button">Log out</button>
 			</div>
 
+			<h2 class="items-title">Contacts</h2>
 			<div class="contact-items" v-if="contacts && contacts.length">
 				<div class="contact-item" :key="contact.key" v-for="contact in contacts">
 					<h2 class="contact-name">{{contact.item.name}} {{contact.item.id}}</h2>
@@ -125,7 +153,16 @@ Vue.component('Home', {
 					<a class="contact-reply" :href="'mailto:' + contact.item.email + '?subject=My return&body=My message...'"><ion-icon class="reply-icon" name="mail-open-outline"></ion-icon> Reply {{contact.item.name}}</a>
 				</div>
 			</div>
+			
+			<h2 class="items-title">Feedbacks</h2>
+			<div class="contact-items" v-if="feedbacks && feedbacks.length">
+				<div class="contact-item" :key="feedback.key" v-for="feedback in feedbacks">
+					<h2 class="contact-name">{{feedback.item.name}} {{feedback.item.id}}</h2>
+					<p class="contact-message">{{feedback.item.message}}</p>
+				</div>
+			</div>
 
+			<h2 class="items-title">Delete items</h2>
 			<form @submit.prevent="deleteData()" class="form">
 				<h2 style="margin: 0 15px;/">Delete Items</h2>
 				<select v-if="contacts && contacts.length" v-model="selected" class="input-box-select">
