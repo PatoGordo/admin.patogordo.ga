@@ -3,13 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="images/android-launchericon-144-144.png" type="image/x-icon">
 
     <title>Patogordo - ControlPage</title>
 
 
-		<!-- Style -->
-    <link href="Src/Styles/style.css" rel="stylesheet" type="text/css" />
+		<!-- Service Worker verification and manifest json -->
+		<meta name="theme-color" content="#0d1117"/>
+    <link rel="manifest" href="manifest.json">
+		<script>
+			//if browser support service worker
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('service-worker.js');
+			}
+			function getMobileOperatingSystem() {
+				var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
+				if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
+					return 'iOS';
+				}else if(userAgent.match( /Android/i )){
+					return 'Android';
+				}else{
+					return 'unknown';
+				}
+			}
+		</script>
+
+
+		<!-- Styles -->
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="Src/Styles/style.less" rel="stylesheet/less" type="text/css" />
+		<!-- Less cdn -->
+		<script src="//cdn.jsdelivr.net/npm/less@3.13" ></script>
 
 		<!-- Icons -->
 		<script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
