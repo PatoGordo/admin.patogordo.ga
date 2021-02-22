@@ -10,6 +10,7 @@ const Home = Vue.component('Home', {
 			showLoginForm: true,
 			message: 'Sign in to see the contacts and delete them.',
 			messageClass: 'warn',
+			isDark: null
     }
   },
 	methods: {
@@ -140,10 +141,31 @@ const Home = Vue.component('Home', {
 				this.scrollToTop()
 				this.returnMessageToNormal(2000)
 			})
+		},
+		changeTheme(){
+			if(localStorage.getItem('admin.patogordo.ga:theme') == 'dark'){
+				localStorage.setItem('admin.patogordo.ga:theme', 'default')
+				document.body.classList.toggle('dark')
+				this.isDark = false
+			}else{
+				localStorage.setItem('admin.patogordo.ga:theme', 'dark')
+				document.body.classList.toggle('dark')
+				this.isDark = true
+			}
+		}
+	},
+	created(){
+		if(localStorage.getItem('admin.patogordo.ga:theme') == 'dark'){
+			this.isDark = true
+		}else{
+			this.isDark = false
 		}
 	},
   template: `
 	<div class="div-component home">
+		<button class="theme-button">
+			<ion-icon @click="changeTheme()" class="theme-icon" :id="isDark ? 'sun' : 'moon'" :name=" isDark ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+		</button>
 		<p class="return-message":class="messageClass">{{message}}</p>
 		<form class="form" @submit.prevent="loginAndShowContacts()" @keyup.enter="loginAndShowContacts()" :style="showLoginForm ? 'display: block' : 'display: none'">
 			<h2 style="margin-bottom: 20px;">Log in</h2>
@@ -175,7 +197,7 @@ const Home = Vue.component('Home', {
 			
 			<h2 class="items-title">{{feedbacks.length > 0 ? 'Feedbacks' : ''}}</h2>
 			<div class="contact-items" v-if="feedbacks && feedbacks.length">
-				<div class="contact-item" :key="feedback.key" v-for="feedback in feedbacks">
+				<div class="feedback-item" :key="feedback.key" v-for="feedback in feedbacks">
 					<h2 class="contact-name">{{feedback.item.name}} {{feedback.item.id}}</h2>
 					<p class="contact-message">{{feedback.item.message}}</p>
 				</div>

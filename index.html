@@ -37,6 +37,10 @@
 		<!-- Less cdn -->
 		<script src="//cdn.jsdelivr.net/npm/less@3.13" ></script>
 
+		<!-- Theme controler -->
+		<script src="Src/themeControler.js"></script>
+
+
 		<!-- Icons -->
 		<script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
 		<script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
@@ -57,6 +61,7 @@
   <body>
 
 		<div id="app"></div>
+		<script>document.body.classList.add(getTheme())</script>
 
 		<!-- Pages Components -->
 		<script src="Src/Pages/home.vue.js"></script>
