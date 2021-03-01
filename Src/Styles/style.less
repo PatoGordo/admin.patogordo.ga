@@ -24,6 +24,7 @@ button, label, input, a{
 	-webkit-tap-highlight-color: transparent;
 }
 input:-webkit-autofill {
+	transition: all ease .5s;
 	-webkit-box-shadow: 0 0 0 30px #fff inset;
 	-webkit-text-fill-color: #000 !important;
 }
@@ -40,8 +41,10 @@ body{
 		}
 		button, .contact-reply, .input-box-select{
 			background: @buttonBg;
+			transition: all ease .5s;
 		}
 		input:-webkit-autofill {
+			transition: all ease .5s;
 			-webkit-box-shadow: 0 0 0 30px @bodyBg inset;
 			-webkit-text-fill-color: @bodyColor !important;
 		}
